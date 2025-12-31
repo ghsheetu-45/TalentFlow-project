@@ -1,0 +1,45 @@
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --accent: #38bdf8;
+  --text: #f8fafc;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+.portfolio {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+h1 { color: var(--accent); font-size: 3rem; margin-bottom: 0; }
+.subtitle { font-size: 1.2rem; opacity: 0.8; margin-top: 5px; }
+
+.tech-stack { margin-top: 40px; }
+.tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+.tags span {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 6px 15px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+}
+
+.card {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 20px;
+  border-bottom: 4px solid var(--accent);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.experience h4 { margin: 0; font-size: 1.5rem; }
+.loading { height: 100vh; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; }
