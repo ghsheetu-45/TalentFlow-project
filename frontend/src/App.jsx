@@ -1,48 +1,60 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [data, setData] = useState(null)
+  const [profile, setProfile] = useState(null);
 
-  // This function "fetches" the data from your Python Backend
+  // Your actual data to show if the backend is offline
+  const fallbackData = {
+    personal_info: { full_name: "Dudes Co", title: "Full Stack Developer & AI Integrator" },
+    current_stack_2025: { 
+      tech: ["FastAPI", "Python 3.12", "RESTful APIs", "React.js", "Tailwind CSS", "Vite"] 
+    },
+    professional_experience: [{
+      company: "Pentagon Spears",
+      role: "Full Stack Developer Intern",
+      achievements: [
+        "Developed scalable API endpoints for internal training modules.",
+        "Optimized database queries reducing load time by 20%."
+      ]
+    }]
+  };
+
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/profile')
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(err => console.log("Backend not connected:", err))
-  }, [])
+      .then(res => res.json())
+      .then(data => setProfile(data))
+      .catch(() => setProfile(fallbackData)); // Loads fallback if backend is off
+  }, []);
 
-  if (!data) return <div className="loading">Loading Professional Data...</div>
+  if (!profile) return <div className="loading">Loading Portfolio...</div>;
 
   return (
     <div className="portfolio">
-      <header>
-        <h1>{data.personal_info.full_name}</h1>
-        <p className="subtitle">{data.personal_info.title}</p>
-      </header>
-
-      <section className="tech-stack">
+      <h1>{profile.personal_info.full_name}</h1>
+      <p className="subtitle">{profile.personal_info.title}</p>
+      
+      <div className="tech-stack">
         <h3>New Technologies (2025)</h3>
         <div className="tags">
-          {data.current_stack_2025.backend.map(tech => <span key={tech}>{tech}</span>)}
-          {data.current_stack_2025.frontend.map(tech => <span key={tech}>{tech}</span>)}
+          {profile.current_stack_2025.tech.map(t => <span key={t}>{t}</span>)}
         </div>
-      </section>
+      </div>
 
-      <section className="experience">
+      <div className="experience">
         <h3>Experience</h3>
-        <div className="card">
-          <h4>{data.professional_experience[0].company}</h4>
-          <p>{data.professional_experience[0].role}</p>
-          <ul>
-            {data.professional_experience[0].achievements.map((point, i) => (
-              <li key={i}>{point}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        {profile.professional_experience.map(exp => (
+          <div key={exp.company} className="card">
+            <h4>{exp.company}</h4>
+            <p>{exp.role}</p>
+            <ul>
+              {exp.achievements.map(a => <li key={a}>{a}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
