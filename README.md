@@ -13,7 +13,7 @@
 
 * *Real-time Data Fetching:* Seamlessly connects the React frontend to the FastAPI backend.
 * *Modern UI/UX:* Responsive design using CSS variables and flexbox for mobile and desktop compatibility.
-* *Strategic Internship Framing:* Displays professional contributions at *Pentagon Spears*, highlighting backend optimization and API development.
+* *Strategic Internship Framing:* Displays professional contributions , highlighting backend optimization and API development.
 * *Performance Optimized:* Built with Vite and FastAPI to ensure sub-second response times.
 
 ## 📂 Project Structure
